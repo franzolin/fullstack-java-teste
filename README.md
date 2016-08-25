@@ -1,8 +1,3 @@
-No arquivo README do projeto
-- explique o funcionamento e a
-- arquitetura da solução adotada na sua implementação.
-Descreva também os passos para executar corretamente seu projeto.
-
 ### Arquitetura adotada
 ##### Back-end
 Optei pela [opção 2](https://github.com/contabilizei/fullstack-java-teste#back-end) usando como banco de dados o **MongoDB**
@@ -43,7 +38,7 @@ Os pedidos já feitos aparecem listados na parte inferior. A atualiza automatica
 - [ ] Implementar controllers
 - [ ] Fazer HTTPrequest - Exclusão
 - [ ] Fazer HTTPrequest - Alteração
-- [ ] Fazer funcao para limpar o form
+- [ ] Fazer funcao para limpar o form  
 #### Back-end
 - [x] Implementar aplicacao JavaEE que lê e escreve do MongoDB
 - [x] Implementar insercao, exclusao e listagem no JavaEE (Pedidos)
