@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+</head>
+
+<body>
+<!-- Angular Material requires Angular.js Libraries -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+    <md-content layout-padding>
+        <md-toolbar class="md-primary">
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex"> Informações do Pedido</h2>
+            </div>
+        </md-toolbar>
+        <div flex-sm="100" flex-gt-sm="80" layout-sm="column">
+            <form name="pedidoForm">
+
+                <div layout-gt-xs="row">
+                    <md-input-container>
+                        <input placeholder="Cliente" ng-model="pedido.Cliente.nome" required>
+                    </md-input-container>
+                    <md-input-container>
+                        <input placeholder="CPF/CNPJ" ng-model="pedido.Cliente.cpfCnpj" required>
+                    </md-input-container>
+                    <md-input-container>
+                        <input placeholder="Telefone" ng-model="pedido.Cliente.telefone" required>
+                    </md-input-container>
+                    <md-input-container>
+                        <input placeholder="E-mail" ng-model="pedido.Cliente.email" required>
+                    </md-input-container>
+                </div>
+
+                <div layout-gt-xs="row">
+                    <md-input-container>
+                        <input placeholder="Número do Pedido" ng-model="pedido.Numero" required>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <md-datepicker placeholder="Data de Emissão" ng-model="pedido.Data" md-placeholder="Enter date"></md-datepicker>
+                    </md-input-container>
+                    <md-input-container>
+                        <input placeholder="Valor Total (R$)" type="number" ng-model="pedido.Valor">
+                    </md-input-container>
+                </div>
+
+                <md-toolbar class="md-primary">
+                    <div class="md-toolbar-tools">
+                        <h2 class="md-flex">Lista de Produtos:</h2>
+                    </div>
+                </md-toolbar>
+                <md-button ng-click="addProduto()">Adicionar Produto</md-button>
+                <div layout-gt-xs="row">
+                    <md-list flex>
+                        <md-list-item ng-repeat="produtos in pedido.ListaProdutos track by $index" >
+
+                            <md-input-container  class="md-icon-float md-block">
+                                <input placeholder="Código do produdo" ng-model="pedido.ListaProdutos[$index].codigo"/>
+                            </md-input-container>
+                            <md-input-container>
+                                <input placeholder="Descrição do produto" ng-model="pedido.ListaProdutos[$index].descricao"/>
+                            </md-input-container>
+                            <md-input-container>
+                                <input placeholder="Quantidade"  type="number" ng-model="pedido.ListaProdutos[$index].quantidade"/>
+                            </md-input-container>
+                            <md-input-container>
+                                <input placeholder="Valor da Unidade (R$)" type="number" ng-model="pedido.ListaProdutos[$index].valor" >
+                            </md-input-container>
+
+                        </md-list-item>
+                    </md-list>
+                </div>
+
+                <md-button class="md-primary" ng-click="salvar()">Adicionar Pedido</md-button>
+            </form>
+        </div>
+    </md-content>
+    <md-content>
+        <div>
+            <md-list flex>
+                <md-toolbar class="md-primary">
+                    <div class="md-toolbar-tools">
+                        <h2 class="md-flex">Lista de Pedidos</h2>
+                    </div>
+                </md-toolbar>
+                <md-list-item class="md-3-line" ng-repeat="x in names" ng-click="null">
+                    <div class="md-list-item-text" layout="column">
+                        <b>{{ x.Numero }}</b>
+                        <p>Cliente: {{ x.Cliente.nome}}</p>
+                        <p>Data do pedido: {{ x.Data}}</p>
+                        <p>Valor total do Pedido: {{ x.Valor | currency }}</p>
+                        <md-buttom ng-click="remover(x.Numero)">Remover Pedido</md-buttom>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </div>
+    </md-content>
+</div>
+
+<script>
+    var app = angular.module('myApp', ['ngMaterial']);
+    app.controller('myCtrl', function($scope, $http) {
+        $scope.pedido = {};
+        $scope.pedido.Numero= "123748123742";
+        $scope.pedido.Data= new Date();
+        $scope.pedido.Cliente={
+            nome:'Contabilizei',
+            cpfCnpj: 12312312309,
+            telefone: '(19) 7070-7070',
+            email:"cont@lizei.com.br"
+        };
+        $scope.pedido.ListaProdutos= [{
+            codigo: '12341',
+            descricao: 'sabonete',
+            quantidade: 3,
+            valor: 2.45
+        }];
+        $scope.addProduto=function(){
+            $scope.pedido.ListaProdutos.push({
+                codigo: '',
+                descricao: '',
+                quantidade: '',
+                valor: ''
+            });
+        };
+        $scope.$watchCollection('pedido.ListaProdutos', function () {
+            $scope.pedido.Valor=$scope.pedido.ListaProdutos.map(
+                    function(item){
+                        return item.quantidade * item.valor
+                    }).reduce(function(a, b){return a + b}, 0);
+        });
+        $scope.salvar=function(){
+            $http.post("/api/pedidos/", $scope.pedido)
+                    .then(function(response) {$http.get("/api/pedidos/")
+                        .then(function (response) {$scope.names = response.data;});
+            });
+        };
+//        $scope.limpar=function () {
+//            $scope.pedido = {};
+//            $scope.pedido.Numero= '';
+//            $scope.pedido.Data= new Date();
+//            $scope.pedido.Cliente={
+//                nome:'',
+//                cpfCnpj: '',
+//                telefone: '',
+//                email:''
+//            };
+//            $scope.pedido.ListaProdutos= []
+//        }
+        $http.get("/api/pedidos/")
+                .then(function (response) {$scope.names = response.data;});
+//        $scope.remover=function(){
+//            $http.delete("/api/pedidos/", $scope.pedido)
+//                    .then(function(response) {$http.get("/api/pedidos/")
+//                            .then(function (response) {$scope.names = response.data;});
+//                    });
+//        };
+    });
+</script>
+</body>
+</html>

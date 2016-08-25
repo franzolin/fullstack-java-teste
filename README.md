@@ -1,112 +1,52 @@
-# Por que trabalhar na Contabilizei
+No arquivo README do projeto
+- explique o funcionamento e a
+- arquitetura da solução adotada na sua implementação.
+Descreva também os passos para executar corretamente seu projeto.
 
-**Eleita a melhor startup B2B da América Latina em 2016, a Contabilizei** é um escritório de contabilidade online, líder de mercado, com sede em Curitiba (PR). Nosso propósito é resolver a dor e burocracia de micro e pequenas empresas ao se manterem regulares com o governo. Somos contadores, só que online, simples assim. Acreditamos no poder da tecnologia para melhorar continuamente a vida das pessoas. 
+### Arquitetura adotada
+##### Back-end
+Optei pela [opção 2](https://github.com/contabilizei/fullstack-java-teste#back-end) usando como banco de dados o **MongoDB**
+##### Front-end
+Optei por usar **Angular Material Design**
 
-Se você tem espírito e comportamento empreendedor, muita disposição e proatividade para trabalhar em uma empresa em franca expansão, você é um forte candidato :)
+### Para executar
+> É necessário instalar o MongoDB  e o Maven
 
-Como Desenvolvedor Full-stack você irá atuar no desenvolvimento de soluções em arquitetura Java Web MVC com RestFul APis (JAX-RS), integrações com outros sistemas (SOAP, XML, JSON), banco de dados NoSQL e soluções escaláveis, participando de todo o processo de desenvolvimento, desde tomadas de decisões à codificação e testes.
+Usando o Intellij:
+ 1. importe o projeto como um *Maven Project*, após isso vá em
+ - Run (barra superior) -> Edit Configuration
+ - Alt + insert ou **+** -> Tomcat Server -> local
+ - Click no botão **Fix** -> fullstack-java-teste:war exploded -> Apply -> OK
+ - Por fim Run(barra superior) -> Run
+ - O browser configurado já sera aberto com a pagina
 
-### O que fazem os Ninjas da Contabilizei? O que comem (e bebem)? Onde vivem?
 
-Somos um time de desenvolvimento ágil, focado em fazer as coisas acontecerem. Trabalhamos com Kanban, entregas contínuas, Git, Cloud, aplicações distribuídas e mais uma porrada de tecnologias novas... Queremos que nosso cliente tenha o produto e a experiência mais fodásticos do planeta. Gostamos de compartilhar ideias, testar tecnologias e de cerveja :)
+### Funcionamento
+Tudo esta em apenas uma pagina, para fazer o pedido basta incluir todos os dados no topo da página e clickar no **Adicionar pedido**
 
-# O trabalho por aqui
+Os pedidos já feitos aparecem listados na parte inferior. A atualiza automaticamento conforme novos pedidos são inseridos
 
-Que tal fazer parte de um time com atitude “get Fˆ%#ing things done”? Participar de uma das maiores disrupções no mercado? Ter a oportunidade de trabalhar com tecnologias e conceitos inovadores, como:
-* Práticas ágeis como Kanban / Scrum
-* Google Cloud Platform
-* Escalabilidade
-* Micro services e aplicações distribuídas
-* Kubernetes
-* Git
-* AngularJs
-* Material Design
-* BDD
+### Tutoriais Usados para implementar o CRUD
+- [Material Angular](https://material.angularjs.org/latest/demo/input)
+- [Form material](http://www.bossable.com/1745/angularjs-material-design-contact-form/)
+- [Java + MongoDB](http://www.mkyong.com/tutorials/java-mongodb-tutorials/)
+- [JAX-RS](https://www.mkyong.com/webservices/jax-rs/jersey-hello-world-example/)
 
-Mais informações sobre a vaga você encontra aqui: [Desenvolvedor Full Stack Java na Contabilizei](https://jobs.lever.co/contabilizei/826c32bd-d800-475a-9f05-531e86dc4ea3)
-
-# O que preciso fazer?
-
-Vamos ser práticos e diretos, se você quer trabalhar conosco siga os passos abaixo:
-
-* Faça um "fork" desse projeto para sua conta GitHub.
-* Implemente o desafio descrito no tópico abaixo.
-* Faça um push para seu repositório com o desafio implementado.
-* Envie um email para (souninja@contabilizei.com.br) avisando que finalizou o desafio com a url do seu fork.
-* Cruze os dedos e aguarde nosso contato.
-
-# O desafio (CRUD de pedidos)
-
-Você deverá criar 2 aplicações para cadastramento de pedidos de venda: 
-
-**Back-end:** aplicação JavaEE baseada em Web Services no padrão RESTful JAX-RS.
-
-**Front-end:** Single Page Application que se comunique com estes serviços. 
-
-A aplicação Back-end dever ter, ao menos, serviços para: inclusão, alteração, exclusão e listagem dos pedidos.
-
-Pedidos deverão conter: 
-* número
-* data de emissão
-* cliente
-* lista de produtos
-* valor total
- 
-Cada produto do pedido deve ter: 
-* código
-* descrição
-* quantidade
-* valor unitário
-
-No pedido, deve constar as seguintes informações do cliente: 
-* cpf ou cnpj
-* nome ou razão social
-* telefone
-* e-mail
-
-### Tecnologias
-
-Escolha umas das opções abaixo para implementar sua solução. A modelagem dos dados fica a seu critério. Não se preocupe com autenticação ou multitenancy.
-
-#### Back-end
-
-**Opção 1**
-
-* Aplicação JavaEE utilizando framework [**Google App Engine para Java**](https://cloud.google.com/appengine/)
-* Banco de dados NOSQL [Datastore](https://cloud.google.com/datastore/)
-* RESTFul API com [Google Endpoints](https://cloud.google.com/appengine/docs/java/endpoints/) ou Jersey JAX-RS
-
-**Opção 2**
-
-* Aplicação pura Java EE (não utilize Spring, Struts, EJB, etc)
-* RESTful API JAX-RS utilizando Servlets ou framework Jersey
-* Banco de dados SQL (MySQL, PostgreSQL, HSQLDB) com JPA ou NOSQL(MongoDB, Cassandra)
-
+### Plano de trabalho
 #### Front-end
-
-* Single Page Application utilizando apenas HTML5 e CSS3 
-* Javascript puro / JQuery (e plugins)
-* AngularJS 1.x (será diferencial)
-* Bootstrap (http://getbootstrap.com/) ou Angular Material Design (será diferencial)
-
-### Arquitetura e documentação
-
-No arquivo README do projeto explique o funcionamento e a arquitetura da solução adotada na sua implementação. Descreva também os passos para executar corretamente seu projeto.
-
-### Avaliação
-
-Entre os critérios de avaliação estão:
-
-* Facilidade de configuração do projeto
-* Performance
-* Código limpo e organização
-* Documentação de código
-* Documentação do projeto (readme)
-* Arquitetura
-* Boas práticas de desenvolvimento
-* Design Patterns
-
-# Sobre você
-
-Queremos saber um pouco mais sobre você também :) Por favor, responda o questionário do arquivo [questions.md](questions.md) e envie junto com seu projeto.
-
+- [x] Entender AngularJS para fazer v0
+- [x] Concluir v0 com layout sem css
+- [x] Usar Angulas Material Design design para deixar a tela apresentavel
+- [x] Fazer lista dinamica para criacao de lista de produtos
+- [x] Fazer HTTPrequest - Listagem
+- [x] Fazer HTTPrequest - Inclusão
+- [ ] Implementar controllers
+- [ ] Fazer HTTPrequest - Exclusão
+- [ ] Fazer HTTPrequest - Alteração
+- [ ] Fazer funcao para limpar o form
+#### Back-end
+- [x] Implementar aplicacao JavaEE que lê e escreve do MongoDB
+- [x] Implementar insercao, exclusao e listagem no JavaEE (Pedidos)
+- [x] Entender o JAX-RS e fazer um exemplo básico
+- [x] Integra com o JAX-Rs
+- [ ] Fazer um conector no Java para gerenciar acesso ao banco
