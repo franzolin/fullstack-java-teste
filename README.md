@@ -38,7 +38,8 @@ Os pedidos já feitos aparecem listados na parte inferior. A atualiza automatica
 - [ ] Implementar controllers
 - [ ] Fazer HTTPrequest - Exclusão
 - [ ] Fazer HTTPrequest - Alteração
-- [ ] Fazer funcao para limpar o form  
+- [ ] Fazer funcao para limpar o form
+
 #### Back-end
 - [x] Implementar aplicacao JavaEE que lê e escreve do MongoDB
 - [x] Implementar insercao, exclusao e listagem no JavaEE (Pedidos)
